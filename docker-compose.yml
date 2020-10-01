@@ -1,4 +1,6 @@
 version: "3.1"
+volumes:
+    mongo_data:
 services:
     app:
         build: .
@@ -11,7 +13,11 @@ services:
         env_file:
             - .env
     mongo:
-        image: mongo
+        image: mongo:latest
         restart: always
-        env_file:
-            - .env
+        environment:
+            - MONGO_INITDB_DATABASE=abizitate
+        volumes:
+            - mongo_data:/data/db
+        ports:
+            - 27017-27019:27017-27019
