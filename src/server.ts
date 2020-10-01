@@ -1,14 +1,8 @@
-console.log("Hello World")
+import { app } from "./express/app"
 
-const express = require('express')
-const app = express()
-const port = 8080
+require('dotenv').config()
 
-app.get('/', (req: any, res: any) => {
-  res.send('Hello World!')
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+app.listen(process.env.PORT || 8080, () => {
+  console.log(`Example app listening at http://localhost:${process.env.PORT || 8080}`)
 })
 
