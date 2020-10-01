@@ -11,4 +11,3 @@ console.log("Starting to listen")
 app.listen(process.env.PORT || 8080, () => {
 	console.log(`Listening at port ${process.env.PORT || 8080}`);
 });
-
