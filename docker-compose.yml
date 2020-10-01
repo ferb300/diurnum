@@ -8,9 +8,10 @@ services:
             - mongo
         depends_on:
             - mongo
+        env_file:
+            - .env
     mongo:
         image: mongo
         restart: always
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: abifag # This is military grade security
-            MONGO_INITDB_ROOT_PASSWORD: abifag # Pretty sure theres an xkcd cartoon about this kinda shit
+        env_file:
+            - .env
