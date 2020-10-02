@@ -1,9 +1,18 @@
 import { RequestHandler } from "express";
+import { Quote } from "../models/quoteModel";
 
 export const addQuote: RequestHandler = async (req, res) => {
-    res.status(200).send();
+    let result = await Quote.create({
+        class: req.body.class || "",
+        date: req.body.date || "",
+        text: req.body.text || "",
+        submittedBy: req.body.submittedBy || "",
+    });
+    res.status(200).json({ success: result ? true : false});
 };
 
+//unpaginated ebug shit will be removed before release
 export const getQuotes: RequestHandler = async (req, res) => {
-    res.status(200).send();
+    let quotes = await Quote.find({});
+    res.status(200).json({ quotes: quotes });
 };
