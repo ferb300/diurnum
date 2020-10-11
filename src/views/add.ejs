@@ -12,6 +12,15 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfjHdYZAAAAAKro5cv3sgjHTzQO8A_FuLbuJ2Uh"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6LfjHdYZAAAAAKro5cv3sgjHTzQO8A_FuLbuJ2Uh', { action: 'demo' })
+                .then(function (token) {
+                    document.getElementById("recapInput").value = token;
+                });
+        });
+    </script>
 
     <style type="text/css">
         .blur-bg::before {
@@ -52,6 +61,18 @@
     <div class="ui middle aligned center aligned grid blur-bg">
         <div class="column">
 
+            <% if (error) { %>
+            <div class="ui negative message">
+                <i class="close icon"></i>
+                <div class="header">
+                    Fehler aufgetreten
+                </div>
+                <p>
+                    Aufgrund eines Fehlers konnte das Zitat nicht hinzugefügt werden.
+                </p>
+            </div>
+            <% } %>
+
             <div class="ui segment">
                 <h1 class="ui header"><a href="/"><i class="angle left icon"></i></a>Zitat hinzufügen</h1>
             </div>
@@ -75,6 +96,7 @@
                         <label>Eingereich von</label>
                         <input type="text" name="submittedBy" placeholder="Name">
                     </div>
+                    <input id="recapInput" type="hidden" name="recaptchaToken">
                     <button type="submit" class="ui fluid large teal submit button">Absenden</button>
                 </div>
 
@@ -86,6 +108,12 @@
     <script>
         $('.dropdown')
             .dropdown();
+        $('.message .close')
+            .on('click', function () {
+                $(this)
+                    .closest('.message')
+                    .transition('fade');
+            });
     </script>
 </body>
 
