@@ -4,7 +4,6 @@ import nodeFetch from "node-fetch";
 import * as classes from "../data/classes.json";
 
 export const addQuote: RequestHandler = async (req, res) => {
-    console.log(req.body.recaptchaToken);
     const secret_key = process.env.RECAPTCHA_KEY;
     const token = req.body.recaptchaToken;
     const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
@@ -17,8 +16,6 @@ export const addQuote: RequestHandler = async (req, res) => {
     } catch (error) {
         return;
     }
-
-    console.log(data);
 
     if (data["success"] && data["success"] > 0.5) {
         let result = await Quote.create({
@@ -42,6 +39,11 @@ export const renderAdd: RequestHandler = async (req, res) => {
 
 export const renderAll: RequestHandler = async (req, res) => {
     let quotes = await Quote.find({});
+    //only the newest quotes
+    quotes = quotes.sort((a,b) => {
+        return a.get("date") > b.get("date") ? -1 : 1;
+    }).slice(0,5);
+
     res.render("all", {
         quotes: quotes
     });
