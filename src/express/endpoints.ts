@@ -24,3 +24,8 @@ export const renderAdd: RequestHandler = async (req, res) => {
         classes: classes
     });
 };
+
+export const renderOverview: RequestHandler = async (req, res) => {
+    console.log(classes);
+    res.render("overview");
+};

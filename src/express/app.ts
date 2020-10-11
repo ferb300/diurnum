@@ -9,5 +9,5 @@ app.use(express.urlencoded());
 app.set('views', path.join(__dirname, '../../src/views'));
 app.set('view engine', 'ejs');
 
-app.use("/views", viewRoutes);
+app.use("/", viewRoutes);
 app.use("/db", dbRoutes);
