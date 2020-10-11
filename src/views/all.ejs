@@ -52,12 +52,18 @@
     <div class="ui middle aligned center aligned grid blur-bg">
         <div class="column">
             <div class="ui segment">
-                <h1 class="ui header">Abizeitung FAG Jahrgang 2020/22</h1>
+                <h1 class="ui header"><a href="/"><i class="angle left icon" ></i></a>Alle Zitate</h1>
+            </div>
+
+            <% quotes.forEach(quote => { %>
+            <div class="ui segment">
+                <h3 class="ui header"><%= quote.class %>, <%= quote.submittedBy %></h3>
                 <p>
-                    <a class="ui button" href="/add">Zitat hinzufügen</a>
-                    <a class="ui button" href="/all">Zitate ansehen</a>
+                    <%= quote.text %>
                 </p>
             </div>
+            <% }) %>
+
         </div>
     </div>
 </body>

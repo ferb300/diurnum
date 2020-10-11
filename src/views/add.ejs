@@ -17,7 +17,7 @@
         .blur-bg::before {
             content: "";
             position: fixed;
-            left: 0;
+            left: -1%;
             right: 0;
             z-index: -1;
 
@@ -51,7 +51,12 @@
 <body>
     <div class="ui middle aligned center aligned grid blur-bg">
         <div class="column">
-            <form class="ui large form">
+
+            <div class="ui segment">
+                <h1 class="ui header"><a href="/"><i class="angle left icon"></i></a>Zitat hinzufügen</h1>
+            </div>
+
+            <form action="/db/addQuote" method="post" class="ui large form">
                 <div class="ui stacked segment">
                     <div class="field">
                         <label>Zitat</label>
@@ -70,7 +75,7 @@
                         <label>Eingereich von</label>
                         <input type="text" name="submittedBy" placeholder="Name">
                     </div>
-                    <div class="ui fluid large teal submit button">Absenden</div>
+                    <button type="submit" class="ui fluid large teal submit button">Absenden</button>
                 </div>
 
             </form>

@@ -5,27 +5,26 @@ import * as classes from "../data/classes.json";
 export const addQuote: RequestHandler = async (req, res) => {
     let result = await Quote.create({
         class: req.body.class || "",
-        date: req.body.date || "",
+        date: Date.now(),
         text: req.body.text || "",
         submittedBy: req.body.submittedBy || ""
     });
-    res.status(200).json({ success: result ? true : false});
-};
-
-//unpaginated debug shit will be removed before release
-export const getQuotes: RequestHandler = async (req, res) => {
-    let quotes = await Quote.find({});
-    res.status(200).json({ quotes: quotes });
+    res.redirect(result ? "/add" : "/add?err=true");
 };
 
 export const renderAdd: RequestHandler = async (req, res) => {
-    console.log(classes);
     res.render("add", {
         classes: classes
     });
 };
 
+export const renderAll: RequestHandler = async (req, res) => {
+    let quotes = await Quote.find({});
+    res.render("all", {
+        quotes: quotes
+    });
+};
+
 export const renderOverview: RequestHandler = async (req, res) => {
-    console.log(classes);
     res.render("overview");
 };
