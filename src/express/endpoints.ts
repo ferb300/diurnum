@@ -30,6 +30,11 @@ export const addQuote: RequestHandler = async (req, res) => {
     }
 };
 
+export const getQuotes: RequestHandler = async (req, res) => {
+    let quotes = await Quote.find({});
+    res.status(200).json({ quotes: quotes });
+};
+
 export const renderAdd: RequestHandler = async (req, res) => {
     res.render("add", {
         classes: classes,
