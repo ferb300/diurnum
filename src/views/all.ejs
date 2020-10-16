@@ -6,7 +6,7 @@
         Abizeitung FAG
     </title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/shortcut.png">
 
@@ -53,12 +53,12 @@
 <body>
     <div class="ui middle aligned center aligned grid blur-bg">
         <div class="column">
-            <div class="ui segment">
+            <div class="ui segment" style="margin: 1em">
                 <h1 class="ui header"><a href="/"><i class="angle left icon" ></i></a>Aktuelle Zitate</h1>
             </div>
 
             <% quotes.forEach(quote => { %>
-            <div class="ui segment">
+            <div class="ui segment" style="margin: 1em">
                 <h3 class="ui header"><%= quote.class %>, <%= quote.submittedBy %></h3>
                 <p>
                     <%= quote.text %>
