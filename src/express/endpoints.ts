@@ -24,15 +24,21 @@ export const addQuote: RequestHandler = async (req, res) => {
             text: req.body.text || "",
             submittedBy: req.body.submittedBy || ""
         });
-        res.redirect(result ? "/add" : "/add?err=true");
+        res.redirect(result ? `/quote/${result.id}` : "/add?err=true");
     } else {
         res.redirect("/add?err=true");
     }
 };
 
-export const getQuotes: RequestHandler = async (req, res) => {
-    let quotes = await Quote.find({});
-    res.status(200).json({ quotes: quotes });
+export const getQuote: RequestHandler = async (req, res) => {
+    let quote = await Quote.findById(req.params.id);
+    if (!quote) {
+        res.redirect("/all");
+    } else {
+        res.render("quote", {
+            quote: quote
+        });
+    }
 };
 
 export const renderAdd: RequestHandler = async (req, res) => {
