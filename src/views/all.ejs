@@ -14,9 +14,6 @@
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
-    <script defer>
-        new ClipboardJS('.clipboard-link');
-    </script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <style type="text/css">
@@ -68,14 +65,17 @@
                     <%= quote.text %>
                 </p>
                 <input type="hidden" id="quoteId" value="https://abizeitungfag.de/quote/<%= quote._id %>">
-                <button class="clipboard-link" data-clipboard-target="#quoteId">
+                <a class="clipboard-link" data-clipboard-target="#quoteId">
                     <i class="share icon"></i> Share-Link kopieren
-                </button>
+                </a>
             </div>
             <% }) %>
 
         </div>
     </div>
-</body>
 
+    <script>
+        new ClipboardJS('.clipboard-link');
+    </script>
+</body>
 </html>
