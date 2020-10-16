@@ -64,10 +64,12 @@
                 <p>
                     <%= quote.text %>
                 </p>
-                <input id="link-<%= quote._id %>" value="https://abizeitungfag.de/quote/<%= quote._id %>">
-                <button class="ui button clipboard-link" data-clipboard-target="#link-<%= quote._id %>">
-                    <i class="share icon"></i> Share-Link kopieren
-                </button>
+                <div class="ui action input">
+                    <input type="text" id="link-<%= quote._id %>" value="https://abizeitungfag.de/quote/<%= quote._id %>">
+                    <button class="ui button clipboard-link" data-clipboard-target="#link-<%= quote._id %>">
+                        <i class="share icon"></i>
+                    </button>
+                  </div>
             </div>
             <% }) %>
 
