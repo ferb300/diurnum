@@ -64,8 +64,8 @@
                 <p>
                     <%= quote.text %>
                 </p>
-                <input style="display: none;" id="quoteId" value="https://abizeitungfag.de/quote/<%= quote._id %>">
-                <a class="clipboard-link" data-clipboard-target="#quoteId">
+                <input style="display: none;" id="link-<%= quote._id %>" value="https://abizeitungfag.de/quote/<%= quote._id %>">
+                <a class="clipboard-link" data-clipboard-target="#link-<%= quote._id %>">
                     <i class="share icon"></i> Share-Link kopieren
                 </a>
             </div>
