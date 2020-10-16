@@ -6,7 +6,7 @@
         Abizeitung FAG
     </title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/shortcut.png">
 
@@ -64,7 +64,7 @@
         <div class="column">
 
             <% if (error) { %>
-            <div class="ui negative message" style="margin: 1em">
+            <div class="ui negative message">
                 <i class="close icon"></i>
                 <div class="header">
                     Fehler aufgetreten
@@ -75,12 +75,12 @@
             </div>
             <% } %>
 
-            <div class="ui segment" style="margin: 1em">
+            <div class="ui segment">
                 <h1 class="ui header"><a href="/"><i class="angle left icon"></i></a>Zitat hinzufügen</h1>
             </div>
 
             <form action="/db/addQuote" method="post" class="ui large form">
-                <div class="ui stacked segment" style="margin: 1em">
+                <div class="ui stacked segment">
                     <div class="field">
                         <label>Zitat</label>
                         <textarea name="text"></textarea>
