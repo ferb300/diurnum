@@ -65,7 +65,6 @@
                     <%= quote.text %>
                 </p>
                 <div class="ui action input clipboard-container">
-                    <label for="link-<%= quote._id %>">Share-Link:</label>
                     <input type="text" id="link-<%= quote._id %>" value="https://abizeitungfag.de/quote/<%= quote._id %>">
                     <button class="ui icon button clipboard-link" data-clipboard-target="#link-<%= quote._id %>">
                         <i class="copy icon"></i>
