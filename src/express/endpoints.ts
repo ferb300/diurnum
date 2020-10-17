@@ -17,7 +17,7 @@ export const addQuote: RequestHandler = async (req, res) => {
         return;
     }
 
-    if (data["success"] && data["success"] > 0.5) {
+    if (data["success"] && data["success"] > 0.5 && req.body.class != "" && req.body.text != "" && req.body.submittedBy != "") {//now this is input verification ._.
         let result = await Quote.create({
             class: req.body.class || "",
             date: Date.now(),

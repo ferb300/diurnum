@@ -13,7 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <style type="text/css">
@@ -64,10 +64,12 @@
                 <p>
                     <%= quote.text %>
                 </p>
-                <input type="hidden" id="quoteId" value="https://abizeitungfag.de/quote/<%= quote._id %>">
-                <a class="clipboard-link" data-clipboard-target="#quoteId">
-                    <i class="share icon"></i> Share-Link kopieren
-                </a>
+                <div class="ui action input clipboard-container">
+                    <input type="text" id="link-<%= quote._id %>" value="https://abizeitungfag.de/quote/<%= quote._id %>">
+                    <button class="ui icon button clipboard-link" data-clipboard-target="#link-<%= quote._id %>">
+                        <i class="copy icon"></i>
+                    </button>
+                  </div>
             </div>
             <% }) %>
 
@@ -76,6 +78,9 @@
 
     <script>
         new ClipboardJS('.clipboard-link');
+        if (!ClipboardJS.isSupported()) {
+            $(".clipboard-container").hide();
+        }
     </script>
 </body>
 </html>
