@@ -53,7 +53,7 @@ export const renderAll: RequestHandler = async (req, res) => {
     //only the newest quotes
     quotes = quotes.sort((a,b) => {
         return a.get("date") > b.get("date") ? -1 : 1;
-    }).slice(0,5);
+    });
 
     res.render("all", {
         quotes: quotes
