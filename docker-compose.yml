@@ -33,7 +33,7 @@ services:
         volumes:
             - nextcloud:${VOLUME}/nextcloud
         environment:
-            - MYSQL_PASSWORD=
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
             - MYSQL_DATABASE=nextcloud
             - MYSQL_USER=nextcloud
             - MYSQL_HOST=nextcloud_db
@@ -44,7 +44,7 @@ services:
         volumes:
             - nextcloud_db:${VOLUME}/mariadb
         environment:
-            - MYSQL_ROOT_PASSWORD=
-            - MYSQL_PASSWORD=
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
             - MYSQL_DATABASE=nextcloud
             - MYSQL_USER=nextcloud
