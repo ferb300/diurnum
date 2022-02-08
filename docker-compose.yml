@@ -1,11 +1,13 @@
 version: "3.1"
 volumes:
     mongo_data:
+    nextcloud:
+    nextcloud_db:
 services:
     app:
         build: .
         ports:
-            - 8080:8080
+            - 8080:${PORT}
         links:
             - mongo
         depends_on:
@@ -21,3 +23,28 @@ services:
             - mongo_data:/data/db
         ports:
             - 27017-27019:27017-27019
+    nextcloud:
+        image: nextcloud
+        restart: always
+        ports:
+            - 8081:80
+        links:
+            - nextcloud_db
+        volumes:
+            - nextcloud:${VOLUME}/nextcloud
+        environment:
+            - MYSQL_PASSWORD=
+            - MYSQL_DATABASE=nextcloud
+            - MYSQL_USER=nextcloud
+            - MYSQL_HOST=nextcloud_db
+    nextcloud_db:
+        image: mariadb
+        restart: always
+        command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+        volumes:
+            - nextcloud_db:${VOLUME}/mariadb
+        environment:
+            - MYSQL_ROOT_PASSWORD=
+            - MYSQL_PASSWORD=
+            - MYSQL_DATABASE=nextcloud
+            - MYSQL_USER=nextcloud
