@@ -1,8 +1,6 @@
 version: "3.1"
 volumes:
     mongo_data:
-    nextcloud:
-    nextcloud_db:
 services:
     app:
         build: .
@@ -31,7 +29,7 @@ services:
         links:
             - nextcloud_db
         volumes:
-            - "nextcloud:${VOLUME}/nextcloud"
+            - "${VOLUME}/nextcloud:/var/www/html"
         environment:
             - MYSQL_PASSWORD=${MYSQL_PASSWORD}
             - MYSQL_DATABASE=nextcloud
@@ -43,7 +41,7 @@ services:
         restart: always
         command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW --innodb-file-per-table=1 --skip-innodb-read-only-compressed
         volumes:
-            - "nextcloud_db:${VOLUME}/mariadb"
+            - "${VOLUME}/mariadb:/var/lib/mysql"
         environment:
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
             - MYSQL_PASSWORD=${MYSQL_PASSWORD}
