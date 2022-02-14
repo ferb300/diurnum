@@ -63,3 +63,11 @@ export const renderAll: RequestHandler = async (req, res) => {
 export const renderOverview: RequestHandler = async (req, res) => {
     res.render("overview");
 };
+
+export const renderCodeForm: RequestHandler = async(req, res) => {
+    res.render("code");
+};
+
+export const renderUploadForm: RequestHandler = async(req, res) => {
+    res.render("upload");
+};

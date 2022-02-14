@@ -5,7 +5,7 @@ services:
     app:
         build: .
         ports:
-            - 8080:${PORT}
+            - 8080:${APP_PORT}
         links:
             - mongo
         depends_on:
@@ -25,7 +25,7 @@ services:
         image: nextcloud
         restart: always
         ports:
-            - 8081:80
+            - 8081:${NEXTCLOUD_PORT}
         links:
             - nextcloud_db
         volumes:
