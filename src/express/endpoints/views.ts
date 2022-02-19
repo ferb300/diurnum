@@ -1,4 +1,5 @@
 import { RequestHandler } from "express";
+
 import { Quote } from "../../models/quoteModel";
 import * as classes from "../../data/classes.json";
 

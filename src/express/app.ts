@@ -1,11 +1,15 @@
-import { actionRoutes, viewRoutes } from "./routes"
-var path = require('path');
+import express from "express";
+import cookieParser from "cookie-parser"
 
-const express = require('express')
+import path from "path";
+
+import { actionRoutes, viewRoutes } from "./routes"
+
+
 export const app = express()
 
 app.use(express.urlencoded());
-app.use(express.cookieParser());
+app.use(cookieParser());
 
 app.set('views', path.join(__dirname, '../../src/views'));
 app.set('view engine', 'ejs');

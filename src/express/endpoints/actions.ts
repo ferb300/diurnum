@@ -1,6 +1,9 @@
 import { RequestHandler } from "express";
-import { Quote } from "../../models/quoteModel";
+
 import nodeFetch from "node-fetch";
+
+import { Quote } from "../../models/quoteModel";
+
 
 export const addQuote: RequestHandler = async (req, res) => {
     const secret_key = process.env.RECAPTCHA_KEY;
