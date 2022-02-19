@@ -1,5 +1,5 @@
 import express, { Router } from "express";
-import { addQuote } from "./endpoints/actions";
+import { addQuote, submitCode } from "./endpoints/actions";
 import { renderAdd, renderAll, renderCodeForm, renderOverview, renderQuote, renderUploadForm } from "./endpoints/views";
 
 export const actionRoutes = Router();
@@ -12,7 +12,8 @@ viewRoutes.get("/quotes/all", renderAll);
 viewRoutes.get("/quotes/quote/:id", renderQuote);
 
 viewRoutes.get("/char", renderCodeForm);
-viewRoutes.get("/char/:code", renderUploadForm);
+viewRoutes.get("/char/upload", renderUploadForm);
 
 //actionRoutes.get("/submitChar", null);
 actionRoutes.post("/addQuote", addQuote);
+actionRoutes.post("/submitCode", submitCode);

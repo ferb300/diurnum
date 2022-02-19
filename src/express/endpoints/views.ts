@@ -43,5 +43,7 @@ export const renderCodeForm: RequestHandler = async(req, res) => {
 };
 
 export const renderUploadForm: RequestHandler = async(req, res) => {
-    res.render("chars/upload");
+    res.render("chars/upload", {
+        name: req.cookies.code
+    });
 };
