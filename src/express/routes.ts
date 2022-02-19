@@ -1,14 +1,18 @@
 import express, { Router } from "express";
-import { addQuote, getQuote, renderAdd, renderAll, renderCodeForm, renderOverview, renderUploadForm } from "./endpoints";
+import { addQuote } from "./endpoints/actions";
+import { renderAdd, renderAll, renderCodeForm, renderOverview, renderQuote, renderUploadForm } from "./endpoints/views";
 
-export const dbRoutes = Router();
+export const actionRoutes = Router();
 export const viewRoutes = Router();
 
-dbRoutes.post("/addQuote", addQuote);
-
-viewRoutes.get("/add", renderAdd);
-viewRoutes.get("/all", renderAll);
-viewRoutes.get("/quote/:id", getQuote);
 viewRoutes.get("/", renderOverview);
+
+viewRoutes.get("/quotes/add", renderAdd);
+viewRoutes.get("/quotes/all", renderAll);
+viewRoutes.get("/quotes/quote/:id", renderQuote);
+
 viewRoutes.get("/char", renderCodeForm);
 viewRoutes.get("/char/:code", renderUploadForm);
+
+//actionRoutes.get("/submitChar", null);
+actionRoutes.post("/addQuote", addQuote);
