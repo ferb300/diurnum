@@ -9,14 +9,14 @@ export const renderQuote: RequestHandler = async (req, res) => {
     if (!quote) {
         res.redirect("/all");
     } else {
-        res.render("quote", {
+        res.render("quotes/quote", {
             quote: quote
         });
     }
 };
 
 export const renderAdd: RequestHandler = async (req, res) => {
-    res.render("add", {
+    res.render("quotes/add", {
         classes: classes,
         error: req.query.err ? true : false
     });
@@ -29,7 +29,7 @@ export const renderAll: RequestHandler = async (req, res) => {
         return a.get("date") > b.get("date") ? -1 : 1;
     });
 
-    res.render("all", {
+    res.render("quotes/all", {
         quotes: quotes
     });
 };
@@ -39,9 +39,9 @@ export const renderOverview: RequestHandler = async (req, res) => {
 };
 
 export const renderCodeForm: RequestHandler = async(req, res) => {
-    res.render("code");
+    res.render("chars/code");
 };
 
 export const renderUploadForm: RequestHandler = async(req, res) => {
-    res.render("upload");
+    res.render("chars/upload");
 };
