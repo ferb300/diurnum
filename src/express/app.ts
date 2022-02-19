@@ -9,7 +9,9 @@ import forms from "./middleware/forms";
 
 export const app = express()
 
-app.use(express.urlencoded());
+app.use(express.json())
+app.use(express.urlencoded({ extended: true}));
+
 app.use(cookieParser());
 app.use(forms)
 

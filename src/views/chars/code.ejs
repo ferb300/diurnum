@@ -54,6 +54,17 @@
 <body>
     <div class="ui middle aligned center aligned grid blur-bg">
         <div class="column">
+            <% if (error) { %>
+                <div class="ui negative message">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        Fehler aufgetreten
+                    </div>
+                    <p>
+                        Der Code ist nicht gültig oder es wurde keiner eingegeben.
+                    </p>
+                </div>
+            <% } %>
 
             <div class="ui segment">
                 <h1 class="ui header"><a href="/"><i class="angle left icon"></i></a>Charakteristik abgeben</h1>
@@ -76,5 +87,14 @@
         </div>
     </div>
 </body>
+
+<script>
+    $('.message .close')
+            .on('click', function () {
+                $(this)
+                    .closest('.message')
+                    .transition('fade');
+            });
+</script>
 
 </html>

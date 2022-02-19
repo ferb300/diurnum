@@ -1,9 +1,9 @@
 import { RequestHandler } from "express";
 
-import formidable from "formidable";
 import nodeFetch from "node-fetch";
 
 import { Quote } from "../../models/quoteModel";
+import { getPerson, hoursToSeconds } from "../../util";
 
 
 export const addQuote: RequestHandler = async (req, res) => {
@@ -20,7 +20,15 @@ export const addQuote: RequestHandler = async (req, res) => {
         return;
     }
 
-    if (data["success"] && data["success"] > 0.5 && req.body.class != "" && req.body.text != "" && req.body.submittedBy != "") {//now this is input verification ._.
+    if (data["success"] 
+        && data["success"] > 0.5 
+        && req.fields
+        && req.fields.class
+        && req.fields.text
+        && req.fields.submittedBy
+        && req.fields.class != "" 
+        && req.fields.text != "" 
+        && req.body.submittedBy != "") {//now this is input verification ._.
         let result = await Quote.create({
             class: req.body.class || "",
             date: Date.now(),
@@ -36,15 +44,12 @@ export const addQuote: RequestHandler = async (req, res) => {
 export const submitCode: RequestHandler = async (req, res) => {
     // TODO: check code
     if (!req.fields || !req.fields.code) {
-        res.send("no")
-        // TODO: error message
+        res.redirect("/char?err=true")
     }
     res.cookie("code", req.fields!.code,
         {
-            maxAge: 24 * 60 * 60,
-            // You can't access these tokens in the client's javascript
+            maxAge: hoursToSeconds(24),
             httpOnly: true,
-            // Forces to use https in production
             secure: process.env.NODE_ENV === "TRUE" ? true : false
         }
     );
@@ -52,5 +57,13 @@ export const submitCode: RequestHandler = async (req, res) => {
 };
 
 export const addCharFile: RequestHandler = async (req, res) => {
-
+    if (!getPerson(req.cookies.code)) {
+        res.redirect("/char?err=true")
+        return
+    }
+    if (req.files) {
+        res.redirect("/char/upload?succ=true")
+    } else {
+        res.redirect("/char/upload?err=true")
+    }
 };

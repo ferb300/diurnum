@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 
 import { Quote } from "../../models/quoteModel";
 import * as classes from "../../data/classes.json";
+import { getPerson } from "../../util";
 
 
 export const renderQuote: RequestHandler = async (req, res) => {
@@ -39,11 +40,21 @@ export const renderOverview: RequestHandler = async (req, res) => {
 };
 
 export const renderCodeForm: RequestHandler = async(req, res) => {
-    res.render("chars/code");
+    res.render("chars/code", {
+        error: req.query.err ? true : false
+    });
 };
 
 export const renderUploadForm: RequestHandler = async(req, res) => {
-    res.render("chars/upload", {
-        name: req.cookies.code
+    let person = getPerson(req.cookies.code)
+    if (!person) {
+        res.redirect("/char?err=true")
+        return;
+    }
+    res.render("chars/add", {
+        name: person!.name,
+        error: req.query.err ? true : false,
+        success: req.query.succ ? true : false,
+        max_upload: process.env.MAX_MB_UPLOAD || 1
     });
 };

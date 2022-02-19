@@ -55,26 +55,61 @@
     <div class="ui middle aligned center aligned grid blur-bg">
         <div class="column">
 
+            <% if (success) { %>
+                <div class="ui positive message">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        Das hat geklappt
+                    </div>
+                    <p>
+                        Die Datei wurde hochgeladen. Mögliche vorher hochgeladene Dateien wurden überschrieben.
+                    </p>
+                </div>
+            <% } %>
+
+            <% if (error) { %>
+                <div class="ui negative message">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        Das hat nicht geklappt
+                    </div>
+                    <p>
+                        Die Datei wurde nicht hochgeladen. Ist sie möglicherweise zu groß oder handelt es sich nicht um eine PDF-Datei?
+                    </p>
+                </div>
+            <% } %>
+
             <div class="ui segment">
                 <h1 class="ui header"><a href="/char"><i class="angle left icon"></i></a>Charakteristik abgeben</h1>
             </div>
 
             <div class="ui segment">
                 <h3 class="ui header"><%= name %></h3>
+                <form action="/action/addChar" method="POST" enctype="multipart/form-data">
                 <p>
                     <div class="ui fluid icon input">
-                        <input type="file" placeholder="Charakteristik">
+                        <input type="file" name="char" accept="application/pdf">
                         <i class="attach icon"></i>
                     </div>
-                    Nur PDF-Dateien, höchstens 30MB, bei mehrmaligem Hochladen bleibt nur die neueste Version erhalten 
+                    Nur PDF-Dateien, höchstens <%= max_upload %>MB, bei mehrmaligem Hochladen bleibt nur die neueste Version erhalten 
                 </p>
                 <p>
-                    <a class="ui button" href="/">Hochladen</a>
+                    <input type="submit" value="Hochladen" class="ui button" href="/"/>
                 </p>
+                </form>
             </div>
 
         </div>
     </div>
 </body>
+
+<script>
+    $('.message .close')
+            .on('click', function () {
+                $(this)
+                    .closest('.message')
+                    .transition('fade');
+            });
+</script>
 
 </html>
