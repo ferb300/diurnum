@@ -3,8 +3,9 @@
 
 <head>
     <title>
-        Abizeitung FAG
+        Charakteristik abgeben
     </title>
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
@@ -53,21 +54,48 @@
 <body>
     <div class="ui middle aligned center aligned grid blur-bg">
         <div class="column">
+            <% if (error) { %>
+                <div class="ui negative message">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        Fehler aufgetreten
+                    </div>
+                    <p>
+                        Der Code ist nicht gültig oder es wurde keiner eingegeben.
+                    </p>
+                </div>
+            <% } %>
+
             <div class="ui segment">
-                <h1 class="ui header">Abizeitung FAG Jahrgang 2020/22</h1>
-                <p>
-                    <a class="ui button" href="/quotes/add">Zitat hinzufügen</a>
-                    <a class="ui button" href="/quotes/all">Zitate ansehen</a>
-                </p>
-                <p>
-                    <a class="ui button" href="/char">Charakteristik abgeben</a>
-                </p>
-                <p>
-                    <a href="https://github.com/ferb300/abizitatesammler"><i class="external alternate icon"></i> Code auf GitHub ansehen</a>
-                </p>
+                <h1 class="ui header"><a href="/"><i class="angle left icon"></i></a>Charakteristik abgeben</h1>
             </div>
+
+            <div class="ui segment">
+                <h3 class="ui header">Abgabe-Code eingeben</h3>
+                <form action="/action/submitCode" method="POST" enctype="multipart/form-data">
+                    <p>
+                        <div class="ui fluid large icon input">
+                            <input type="text" name="code" placeholder="Abgabe-Code" style="text-align: center;">
+                        </div>
+                    </p>
+                    <p>
+                        <input type="submit" class="ui button" value="Absenden" />
+                    </p>
+                </form>
+            </div>
+
         </div>
     </div>
 </body>
+
+<script>
+    window.history.replaceState({}, document.title, "/char");
+    $('.message .close')
+            .on('click', function () {
+                $(this)
+                    .closest('.message')
+                    .transition('fade');
+            });
+</script>
 
 </html>

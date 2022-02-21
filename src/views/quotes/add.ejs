@@ -67,7 +67,7 @@
             <div class="ui negative message">
                 <i class="close icon"></i>
                 <div class="header">
-                    Fehler aufgetreten
+                    Das hat nicht geklappt
                 </div>
                 <p>
                     Aufgrund eines Fehlers konnte das Zitat nicht hinzugefügt werden.
@@ -79,7 +79,7 @@
                 <h1 class="ui header"><a href="/"><i class="angle left icon"></i></a>Zitat hinzufügen</h1>
             </div>
 
-            <form action="/db/addQuote" method="post" class="ui large form">
+            <form action="/action/addQuote" method="post" class="ui large form">
                 <div class="ui stacked segment">
                     <div class="field">
                         <label>Zitat</label>
@@ -105,18 +105,18 @@
             </form>
         </div>
     </div>
-
-
-    <script>
-        $('.dropdown')
-            .dropdown();
-        $('.message .close')
-            .on('click', function () {
-                $(this)
-                    .closest('.message')
-                    .transition('fade');
-            });
-    </script>
 </body>
+
+<script>
+    window.history.replaceState({}, document.title, "/quotes/add");
+    $('.dropdown')
+        .dropdown();
+    $('.message .close')
+        .on('click', function () {
+            $(this)
+                .closest('.message')
+                .transition('fade');
+        });
+</script>
 
 </html>
