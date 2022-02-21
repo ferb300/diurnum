@@ -10,7 +10,6 @@ export function hoursToSeconds(hours: number): number {
 }
 
 export function getPerson(code: string): Person | null {
-    console.log(people.length)
     for (let i = 0; i < people.length; i++) {
         if (people[i].code == code) {
             return people[i]

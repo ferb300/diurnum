@@ -1,8 +1,12 @@
 import { RequestHandler } from "express";
+import { File } from "formidable";
+import fs from "fs"
 
 import nodeFetch from "node-fetch";
+import { createClient } from "webdav";
 
 import { Quote } from "../../models/quoteModel";
+import { Person } from "../../types/person";
 import { getPerson, hoursToSeconds } from "../../util";
 
 
@@ -57,13 +61,30 @@ export const submitCode: RequestHandler = async (req, res) => {
 };
 
 export const addCharFile: RequestHandler = async (req, res) => {
-    if (!getPerson(req.cookies.code)) {
+    let person: Person | null
+    let filename = ""
+    let file: File | null
+    
+    let client = createClient(
+        `http://nextcloud/remote.php/dav/files/${process.env.NEXTCLOUD_BOT_USERNAME}`,
+        {
+            username: process.env.NEXTCLOUD_BOT_USERNAME!,
+            password: process.env.NEXTCLOUD_BOT_PASSWORD!
+        }
+    )
+    if (!(person = getPerson(req.cookies.code)) || !req.files || !(await client.exists(process.env.CHAR_FOLDER!))) {
         res.redirect("/char?err=true")
         return
     }
-    if (req.files) {
+    
+    filename = process.env.CHAR_FOLDER + "/" + person!.name.replace(" ", "_") + ".pdf"
+    file = req.files.char as File
+
+    if (await client.putFileContents(filename, fs.createReadStream(file.filepath), { overwrite: true })) {
         res.redirect("/char/upload?succ=true")
     } else {
         res.redirect("/char/upload?err=true")
     }
+
+    fs.unlink(file.filepath, () => {})
 };

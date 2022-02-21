@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
-
 import { app } from "./express/app";
+
+import mongoose from "mongoose";
+import "dotenv/config"
 
 
 /*console.log("Connecting to Database");
@@ -13,3 +14,5 @@ console.log("Starting to listen")
 app.listen(process.env.PORT || 8080, () => {
 	console.log(`Listening at port ${process.env.PORT || 8080}`);
 });
+
+console.log(process.env.NEXTCLOUD_DOMAINS)

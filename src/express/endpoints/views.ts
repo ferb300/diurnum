@@ -55,6 +55,6 @@ export const renderUploadForm: RequestHandler = async(req, res) => {
         name: person!.name,
         error: req.query.err ? true : false,
         success: req.query.succ ? true : false,
-        max_upload: process.env.MAX_MB_UPLOAD || 1
+        max_upload: process.env.MAX_MB_UPLOAD!
     });
 };
