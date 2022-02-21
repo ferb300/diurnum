@@ -25,6 +25,7 @@ export const renderAdd: RequestHandler = async (req, res) => {
 
 export const renderAll: RequestHandler = async (req, res) => {
     let quotes = await Quote.find({});
+
     //only the newest quotes
     quotes = quotes.sort((a,b) => {
         return a.get("date") > b.get("date") ? -1 : 1;

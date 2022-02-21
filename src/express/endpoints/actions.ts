@@ -14,17 +14,13 @@ export const addQuote: RequestHandler = async (req, res) => {
     const secret_key = process.env.RECAPTCHA_KEY;
     const token = req.body.recaptchaToken;
     const url = `https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`;
-    let response = await nodeFetch(url, {
-        method: 'post'
-    });
-    let data = [];
     try {
-        data = await response.json();
-    } catch (error) {
-        return;
-    }
-
-    if (data["success"] 
+        let response = await nodeFetch(url, {
+            method: "post"
+        })
+        let data = []
+        data = await response.json()
+        if (data["success"] 
         && data["success"] > 0.5 
         && req.fields
         && req.fields.class
@@ -40,15 +36,16 @@ export const addQuote: RequestHandler = async (req, res) => {
             submittedBy: req.body.submittedBy || ""
         });
         res.redirect(result ? `/quote/${result.id}` : "/add?err=true");
-    } else {
+    }
+    } catch (error) {
         res.redirect("/add?err=true");
     }
 };
 
 export const submitCode: RequestHandler = async (req, res) => {
-    // TODO: check code
     if (!req.fields || !req.fields.code) {
         res.redirect("/char?err=true")
+        return;
     }
     res.cookie("code", req.fields!.code,
         {
@@ -72,19 +69,21 @@ export const addCharFile: RequestHandler = async (req, res) => {
             password: process.env.NEXTCLOUD_BOT_PASSWORD!
         }
     )
-    if (!(person = getPerson(req.cookies.code)) || !req.files || !(await client.exists(process.env.CHAR_FOLDER!))) {
-        res.redirect("/char?err=true")
+
+    try {
+        if (!(person = getPerson(req.cookies.code)) || !req.files || !(await client.exists(process.env.CHAR_FOLDER!))) {
+            throw "Code wasn't found, no files uploaded or nextcloud folder does not exist"
+        }
+        
+        filename = process.env.CHAR_FOLDER + "/" + person!.name.replace(" ", "_") + ".pdf"
+        file = req.files.char as File
+    
+        await client.putFileContents(filename, fs.createReadStream(file.filepath), { overwrite: true })
+    
+        fs.unlink(file.filepath, () => {})
+    } catch (err) {
+        res.redirect("/char/upload?err=true")
         return
     }
-    
-    filename = process.env.CHAR_FOLDER + "/" + person!.name.replace(" ", "_") + ".pdf"
-    file = req.files.char as File
-
-    if (await client.putFileContents(filename, fs.createReadStream(file.filepath), { overwrite: true })) {
-        res.redirect("/char/upload?succ=true")
-    } else {
-        res.redirect("/char/upload?err=true")
-    }
-
-    fs.unlink(file.filepath, () => {})
+    res.redirect("/char/upload?succ=true")
 };

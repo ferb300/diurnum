@@ -83,7 +83,7 @@
                 <h1 class="ui header"><a href="/char"><i class="angle left icon"></i></a>Charakteristik abgeben</h1>
             </div>
 
-            <div class="ui segment">
+            <div class="ui segment" id="uploadSegment">
                 <h3 class="ui header"><%= name %></h3>
                 <form action="/action/addChar" method="POST" enctype="multipart/form-data">
                 <p>
@@ -94,7 +94,7 @@
                     Nur PDF-Dateien, höchstens <%= max_upload %>MB, bei mehrmaligem Hochladen bleibt nur die neueste Version erhalten 
                 </p>
                 <p>
-                    <input type="submit" value="Hochladen" class="ui button" href="/"/>
+                    <input type="submit" value="Hochladen" class="ui button" href="/" onclick="$('#uploadSegment').addClass('loading')"/>
                 </p>
                 </form>
             </div>
@@ -104,6 +104,7 @@
 </body>
 
 <script>
+    window.history.replaceState({}, document.title, "/char/upload");
     $('.message .close')
             .on('click', function () {
                 $(this)

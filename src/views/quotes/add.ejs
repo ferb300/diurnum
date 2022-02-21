@@ -105,18 +105,18 @@
             </form>
         </div>
     </div>
-
-
-    <script>
-        $('.dropdown')
-            .dropdown();
-        $('.message .close')
-            .on('click', function () {
-                $(this)
-                    .closest('.message')
-                    .transition('fade');
-            });
-    </script>
 </body>
+
+<script>
+    window.history.replaceState({}, document.title, "/quotes/add");
+    $('.dropdown')
+        .dropdown();
+    $('.message .close')
+        .on('click', function () {
+            $(this)
+                .closest('.message')
+                .transition('fade');
+        });
+</script>
 
 </html>
