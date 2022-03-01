@@ -23,6 +23,9 @@ A package of webservices intended to organize content for graduation papers. It 
 12. Enter the domain the Nextcloud instance is accessible under and its container name to the `Trusted Domains` property in the `config.php` file in the Nextcloud volume
 13. Run `docker compose build && docker compose up -d`
 
+## Code Generation
+To generate codes for the characteristics upload system, use (Diurnum-codegen)[https://github.com/ferb300/diurnum-codegen]
+
 ## License
 This software is published under the [General Public License V3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
