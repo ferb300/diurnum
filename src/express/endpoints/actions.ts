@@ -1,9 +1,9 @@
 import { RequestHandler } from "express";
-import { File } from "formidable";
 import fs from "fs"
 
 import nodeFetch from "node-fetch";
 import { createClient } from "webdav";
+import { File } from "formidable";
 
 import { Quote } from "../../models/quoteModel";
 import { Person } from "../../types/person";
@@ -30,7 +30,7 @@ export const addQuote: RequestHandler = async (req, res) => {
             text: req.fields!.text || "",
             submittedBy: req.fields!.submittedBy || ""
         });
-        res.redirect(`/quote/${result.id}`);
+        res.redirect(`/quotes/quote/${result.id}`);
     } catch (error) {
         res.redirect("/quotes/add?err=true");
     }
@@ -43,7 +43,7 @@ export const submitCode: RequestHandler = async (req, res) => {
     }
     res.cookie("code", req.fields!.code,
         {
-            maxAge: hoursToSeconds(1),
+            maxAge: hoursToSeconds(24),
             httpOnly: true,
             secure: process.env.NODE_ENV === "TRUE" ? true : false
         }
@@ -79,6 +79,9 @@ export const addCharFile: RequestHandler = async (req, res) => {
         fs.unlink(file.filepath, () => { })
         res.redirect("/char/upload?succ=true")
     } catch (err) {
+        console.log(`err in endpoint: ${err}`)
+        console.log(req.cookies)
+        console.log(req.cookies as any)
         res.redirect("/char/upload?err=true")
     }
 };

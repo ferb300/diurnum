@@ -14,7 +14,6 @@ export default function forms(req: express.Request, res: express.Response, next:
     });
     form.parse(req, (err, fields, files) => {
         if (err) {
-            console.log("err")
             next();
         }
         req.fields = fields as formidable.Fields
