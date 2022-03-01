@@ -1,19 +1,23 @@
 import { RequestHandler } from "express";
 
+import { Document } from "mongoose";
+
 import { Quote } from "../../models/quoteModel";
 import * as classes from "../../data/classes.json";
 import { getPerson } from "../../util";
 
 
 export const renderQuote: RequestHandler = async (req, res) => {
-    let quote = await Quote.findById(req.params.id);
-    if (!quote) {
+    let quote: Document | null
+    try {
+        quote = await Quote.findById(req.params.id);
+    } catch {
         res.redirect("/all");
-    } else {
-        res.render("quotes/quote", {
-            quote: quote
-        });
+        return
     }
+    res.render("quotes/quote", {
+        quote: quote
+    });
 };
 
 export const renderAdd: RequestHandler = async (req, res) => {
@@ -24,7 +28,12 @@ export const renderAdd: RequestHandler = async (req, res) => {
 };
 
 export const renderAll: RequestHandler = async (req, res) => {
-    let quotes = await Quote.find({});
+    let quotes: Document[]
+    try {
+        quotes = await Quote.find({});
+    } catch {
+        quotes = []
+    }
 
     //only the newest quotes
     quotes = quotes.sort((a,b) => {
