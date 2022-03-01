@@ -79,9 +79,6 @@ export const addCharFile: RequestHandler = async (req, res) => {
         fs.unlink(file.filepath, () => { })
         res.redirect("/char/upload?succ=true")
     } catch (err) {
-        console.log(`err in endpoint: ${err}`)
-        console.log(req.cookies)
-        console.log(req.cookies as any)
         res.redirect("/char/upload?err=true")
     }
 };
