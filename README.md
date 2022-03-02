@@ -3,7 +3,7 @@
 [![TypeScript](https://badgen.net/badge/icon/typescript?icon=typescript&label)](https://typescriptlang.org) [![Docker](https://badgen.net/badge/icon/docker?icon=docker&label)](https://https://docker.com/) [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html) [![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](https://github.com/ferb300/diurnum) [![Awesome Badges](https://img.shields.io/badge/badges-awesome-green.svg)](https://github.com/ferb300/diurnum)
 
 A package of webservices intended to organize content for graduation newspapers. It contains:
-- a Nextcloud Instance for collborative work
+- a Nextcloud Instance for collaborative work
 - a web app for submitting quotes and characteristics
 
 ## Setup
@@ -24,7 +24,7 @@ A package of webservices intended to organize content for graduation newspapers.
 13. Run `docker compose build && docker compose up -d`
 
 ## Code Generation
-To generate codes for the characteristics submission system, use [Diurnum-codegen](https://github.com/ferb300/diurnum-codegen)
+To generate codes for the characteristics submission system, use [Diurnum Codegen](https://github.com/ferb300/diurnum-codegen)
 
 ## License
 This software is published under the [General Public License V3](https://www.gnu.org/licenses/gpl-3.0.en.html)
